@@ -56,43 +56,44 @@
     <!-- Header -->
     <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-40">
       <div class="px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center py-4">
-          <!-- Logo & Title -->
-          <h1 class="text-2xl font-bold flex items-center space-x-2">
-            <span class="text-3xl">🔬</span>
-            <span>Evidence <span class="text-blue-400">Browser</span></span>
-          </h1>
+        <div class="flex flex-col py-3 space-y-3">
+          <!-- Top Row: Logo & User -->
+          <div class="flex justify-between items-center">
+            <h1 class="text-xl font-bold flex items-center space-x-2">
+              <span class="text-2xl">🔬</span>
+              <span class="hidden sm:inline">Evidence <span class="text-blue-400">Browser</span></span>
+            </h1>
 
-          <!-- Navigation -->
-          <nav class="flex space-x-1 overflow-x-auto" id="nav-buttons">
-            <button data-view="discoveries" class="px-3 py-2 text-xs sm:text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition whitespace-nowrap">
+            <div class="flex items-center space-x-2" id="user-info">
+              <span id="user-display" class="text-xs text-gray-400 hidden sm:inline"></span>
+              <span id="user-role-badge" class="px-2 py-1 text-xs font-medium bg-purple-600 text-white rounded"></span>
+              <button onclick="handleLogout()" class="px-3 py-1.5 text-xs font-medium text-gray-300 hover:text-white transition">
+                Logout
+              </button>
+            </div>
+          </div>
+
+          <!-- Navigation Row -->
+          <nav class="flex space-x-2 overflow-x-auto pb-1" id="nav-buttons">
+            <button data-view="discoveries" class="px-4 py-2.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition whitespace-nowrap">
               🔥 Discoveries
             </button>
-            <button data-view="dashboard" class="px-3 py-2 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap">
+            <button data-view="dashboard" class="px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap">
               Dashboard
             </button>
-            <button data-view="search" class="px-3 py-2 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap">
+            <button data-view="search" class="px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap">
               Search
             </button>
-            <button data-view="mindmap" class="px-3 py-2 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap">
+            <button data-view="mindmap" class="px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap">
               🕸️ Mind Map
             </button>
-            <button data-view="legal" class="px-3 py-2 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap">
+            <button data-view="legal" class="px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap">
               ⚖️ Legal
             </button>
-            <button data-view="admin" id="admin-nav-btn" class="px-3 py-2 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap" style="display:none">
+            <button data-view="admin" id="admin-nav-btn" class="px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition whitespace-nowrap" style="display:none">
               ⚙️ Admin
             </button>
           </nav>
-
-          <!-- User Menu -->
-          <div class="flex items-center space-x-3" id="user-info">
-            <span id="user-display" class="text-sm text-gray-400"></span>
-            <span id="user-role-badge" class="px-2 py-1 text-xs font-medium bg-purple-600 text-white rounded"></span>
-            <button onclick="handleLogout()" class="px-3 py-2 text-sm font-medium text-gray-300 hover:text-white transition">
-              Logout
-            </button>
-          </div>
         </div>
 
         <!-- Search Bar -->
