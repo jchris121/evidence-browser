@@ -30,13 +30,14 @@ DEVICE_NAMES = _json.load(open(_dn_path)) if os.path.exists(_dn_path) else {}
 async def auth_middleware(request: Request, call_next):
     path = request.url.path
 
-    # Public routes: static files, index, auth endpoints, media files
+    # Public routes: static files, index, login/logout only
     # Media files exempt from bearer auth (img/audio/video tags can't send headers)
     # Still protected by Tailscale network + login required to see media URLs
     if (path.startswith("/static/") or
         path == "/" or
         path == "/login" or
-        path.startswith("/api/auth/") or
+        path == "/api/auth/login" or
+        path == "/api/auth/logout" or
         (path.startswith("/api/media/") and not path.startswith("/api/media/list/"))):
         return await call_next(request)
 
