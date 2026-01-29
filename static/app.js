@@ -147,7 +147,8 @@ function render() {
   const main = document.getElementById('app');
   const views = { dashboard: renderDashboard, device: renderDevice, search: renderSearch, discoveries: renderDiscoveries, mindmap: renderMindMap, legal: renderLegalFiles, admin: renderAdmin };
   (views[state.view] || renderDashboard)(main);
-  document.querySelectorAll('#nav-buttons button').forEach(b => {
+  // Update active state on both mobile and desktop nav
+  document.querySelectorAll('#nav-buttons button, #nav-buttons-desktop button').forEach(b => {
     b.classList.toggle('active', b.dataset.view === state.view);
   });
 }
@@ -916,7 +917,11 @@ function highlightMatch(text, query) {
 
 // --- Init ---
 function initApp() {
-  document.querySelectorAll('#nav-buttons button').forEach(b => b.addEventListener('click', () => navigate(b.dataset.view)));
+  // Hook up both mobile and desktop navigation
+  document.querySelectorAll('#nav-buttons button, #nav-buttons-desktop button').forEach(b => {
+    b.addEventListener('click', () => navigate(b.dataset.view));
+  });
+  
   document.getElementById('header-search')?.addEventListener('keydown', e => {
     if (e.key === 'Enter') { state.searchQuery = e.target.value; navigate('search'); }
   });
@@ -1069,12 +1074,52 @@ function buildGraph() {
     .filter(e => nodeIds.has(e.source) && nodeIds.has(e.target))
     .map(e => {
       const mainType = e.types[0]?.type || 'shared_contact';
+      
+      // Calculate total interactions
+      const totalCount = e.types.reduce((sum, t) => {
+        return sum + (t.count || t.message_count || 0);
+      }, 0);
+      
+      // Build rich tooltip
+      const tooltipLines = e.types.map(t => {
+        const count = t.count || t.message_count || 0;
+        const typeIcon = {
+          'phone_call': '📞',
+          'chat': '💬',
+          'email': '📧',
+          'shared_contact': '👥',
+          'signal_group': '🔴'
+        }[t.type] || '🔗';
+        
+        let line = `${typeIcon} ${t.type}: ${count}`;
+        if (t.platform) line += ` (${t.platform})`;
+        if (t.date_range) line += `\n   📅 ${t.date_range}`;
+        return line;
+      });
+      
+      tooltipLines.unshift(`🔗 Total: ${totalCount} interactions`);
+      
+      // Edge label (show total count for strong connections)
+      const edgeLabel = e.weight >= 10 ? `${totalCount}` : '';
+      
+      // Color by primary type
+      const edgeColor = EDGE_COLORS[mainType] || '#95A5A6';
+      
       return {
         from: e.source,
         to: e.target,
         value: Math.log2(e.weight + 1),
-        color: { color: EDGE_COLORS[mainType] || '#95A5A6', opacity: 0.7 },
-        title: e.types.map(t => `${t.type}: ${t.count || t.message_count || 0}`).join('\n'),
+        label: edgeLabel,
+        color: { color: edgeColor, opacity: 0.8 },
+        title: tooltipLines.join('\n'),
+        font: { 
+          size: 12, 
+          color: '#ECF0F1', 
+          strokeWidth: 2, 
+          strokeColor: '#2C3E50',
+          align: 'middle'
+        },
+        width: Math.min(1 + Math.log2(e.weight + 1) * 0.5, 6),
         _data: e,
       };
     });
@@ -1812,21 +1857,70 @@ function showEdgeDetails(edge) {
   const srcNode = networkData.nodes.find(n => n.id === edge.source);
   const tgtNode = networkData.nodes.find(n => n.id === edge.target);
 
+  // Calculate statistics
+  const totalInteractions = edge.types.reduce((sum, t) => {
+    return sum + (t.count || t.message_count || 0);
+  }, 0);
+  
+  const typeBreakdown = edge.types.map(t => ({
+    type: t.type,
+    count: t.count || t.message_count || 0,
+    percentage: ((t.count || t.message_count || 0) / totalInteractions * 100).toFixed(1)
+  })).sort((a, b) => b.count - a.count);
+  
+  // Collect all dates
+  const allDates = edge.types.map(t => t.date_range).filter(Boolean);
+  const dateRange = allDates.length > 0 ? `📅 ${allDates[0]}` : '';
+
   let html = `
-    <h3>${esc(srcNode?.name || '?')} ↔ ${esc(tgtNode?.name || '?')}</h3>
-    <div class="mm-stats"><div>Total weight: ${edge.weight}</div></div>
-    <h4>Connection Types</h4>
+    <h3>🔗 Connection Analysis</h3>
+    <div style="font-size: 1.1em; margin: 12px 0; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+      <strong>${esc(srcNode?.name || '?')}</strong> ↔ <strong>${esc(tgtNode?.name || '?')}</strong>
+    </div>
+    
+    <div class="mm-stats" style="background: rgba(255,255,255,0.08); padding: 12px; border-radius: 6px; margin: 12px 0;">
+      <div style="font-size: 1.2em; font-weight: bold; color: var(--accent);">📊 ${totalInteractions} Total Interactions</div>
+      ${dateRange ? `<div style="margin-top: 6px; color: var(--text2);">${dateRange}</div>` : ''}
+    </div>
+
+    <h4 style="margin-top: 16px;">Evidence Chain Breakdown</h4>
   `;
+  
+  // Connection type icons
+  const typeIcons = {
+    'phone_call': '📞',
+    'chat': '💬',
+    'text_message': '💬',
+    'email': '📧',
+    'shared_contact': '👥',
+    'signal_group': '🔴'
+  };
+  
   for (const t of edge.types) {
     const color = EDGE_COLORS[t.type] || '#95A5A6';
-    html += `<div class="mm-edge-type" style="border-left:3px solid ${color};padding-left:8px;margin:6px 0">
-      <strong>${t.type}</strong>
-      ${t.count ? `<div>Count: ${t.count}</div>` : ''}
-      ${t.message_count ? `<div>Messages: ${t.message_count}</div>` : ''}
-      ${t.platform ? `<div>Platform: ${t.platform}</div>` : ''}
-      ${t.appears_on_devices ? `<div>Devices: ${t.appears_on_devices.join(', ')}</div>` : ''}
-      ${t.date_range ? `<div>Date: ${t.date_range}</div>` : ''}
+    const icon = typeIcons[t.type] || '🔗';
+    const count = t.count || t.message_count || 0;
+    const percentage = (count / totalInteractions * 100).toFixed(1);
+    
+    html += `<div class="mm-edge-type" style="
+      border-left: 4px solid ${color};
+      padding-left: 12px;
+      margin: 10px 0;
+      background: rgba(255,255,255,0.03);
+      padding: 10px;
+      border-radius: 0 6px 6px 0;
+    ">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <strong style="font-size: 1.05em;">${icon} ${t.type.replace('_', ' ').toUpperCase()}</strong>
+        <span style="background: ${color}; color: #000; padding: 2px 8px; border-radius: 10px; font-size: 0.85em; font-weight: bold;">
+          ${count} (${percentage}%)
+        </span>
+      </div>
+      ${t.platform ? `<div style="color: var(--text2); font-size: 0.9em;">📱 Platform: ${t.platform}</div>` : ''}
+      ${t.date_range ? `<div style="color: var(--text2); font-size: 0.9em;">📅 ${t.date_range}</div>` : ''}
+      ${t.appears_on_devices ? `<div style="color: var(--text2); font-size: 0.9em; margin-top: 4px;">💾 Devices: ${t.appears_on_devices.join(', ')}</div>` : ''}
     </div>`;
   }
+  
   sidebar.innerHTML = html;
 }
