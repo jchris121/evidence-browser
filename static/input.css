@@ -321,7 +321,113 @@
   /* Mind Map Container */
   .mindmap-container {
     @apply w-full rounded-lg border border-gray-700 bg-gray-800 overflow-hidden;
-    height: 600px;
+    height: 800px;
+  }
+
+  .mindmap-controls {
+    @apply p-4 bg-gray-800 border-b border-gray-700 space-y-3;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .control-group {
+    @apply space-y-2;
+  }
+
+  .control-group label:first-child {
+    @apply block text-sm font-medium text-gray-300 mb-1;
+  }
+
+  .control-group .toggle {
+    @apply inline-flex items-center text-sm text-gray-400 mr-3 cursor-pointer;
+  }
+
+  .control-group .toggle input {
+    @apply mr-1;
+  }
+
+  .mindmap-body {
+    @apply flex h-full;
+  }
+
+  #network-graph {
+    @apply flex-1 bg-gray-900;
+  }
+
+  .mindmap-sidebar {
+    @apply w-80 p-4 bg-gray-800 border-l border-gray-700 overflow-y-auto;
+  }
+
+  .mindmap-sidebar h3 {
+    @apply text-lg font-bold text-white mb-3 pb-2 border-b border-gray-700;
+  }
+
+  .mindmap-sidebar h4 {
+    @apply text-sm font-semibold text-gray-300 mt-4 mb-2;
+  }
+
+  /* Path Display */
+  .path-display {
+    @apply bg-gray-800 rounded-lg p-3 my-3;
+  }
+
+  .path-node {
+    @apply text-white font-medium py-2 px-3 bg-blue-600 rounded text-center;
+  }
+
+  .path-arrow {
+    @apply text-center text-gray-400 text-2xl py-1;
+  }
+
+  /* Community List */
+  .community-list {
+    @apply space-y-2 mt-3;
+  }
+
+  .community-item {
+    @apply bg-gray-800 rounded p-3 pl-4;
+  }
+
+  /* Stats List */
+  .stats-list {
+    @apply space-y-2 mt-3;
+  }
+
+  .stat-row {
+    @apply flex justify-between items-center text-sm py-2 px-3 bg-gray-800 rounded;
+  }
+
+  .stat-row span {
+    @apply text-gray-400;
+  }
+
+  .stat-row strong {
+    @apply text-white font-semibold;
+  }
+
+  .top-nodes {
+    @apply space-y-2 mt-2;
+  }
+
+  .top-node-item {
+    @apply flex items-center gap-2 text-sm py-2 px-3 bg-gray-800 rounded;
+  }
+
+  .top-node-item .rank {
+    @apply text-blue-400 font-bold w-6;
+  }
+
+  .top-node-item .name {
+    @apply flex-1 text-white;
+  }
+
+  .top-node-item .degree {
+    @apply text-gray-400 text-xs;
+  }
+
+  /* Button Styles for Mind Map */
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs font-medium bg-gray-700 text-gray-300 hover:bg-gray-600 rounded transition cursor-pointer;
   }
 
   /* Legal Files */
