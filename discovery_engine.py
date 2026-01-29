@@ -439,6 +439,9 @@ def scan_discoveries_from_db(conn, device_map):
     """Scan discoveries from SQLite records table. Much faster than re-parsing markdown."""
     discoveries = list(VERIFIED_DISCOVERIES)
     disc_id = 100
+    
+    # Create cursor for database queries
+    cur = conn.cursor()
 
     # Build term patterns for SQL LIKE queries (3-flame and 2-flame terms only)
     high_terms_3 = ["trusted build", "Gold Hill", "adjudication", "Conan", "Hayes", "Griswold", "ballot image"]
