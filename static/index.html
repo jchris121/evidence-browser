@@ -272,29 +272,5 @@
 
   <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
   <script src="/static/app.js"></script>
-  <script>
-    // Sync desktop and mobile nav
-    function syncNavigation() {
-      const desktopNav = document.getElementById('nav-buttons-desktop');
-      const bottomNav = document.getElementById('nav-buttons');
-      
-      if (desktopNav && bottomNav) {
-        desktopNav.querySelectorAll('button').forEach((btn, idx) => {
-          btn.addEventListener('click', () => navigate(btn.dataset.view));
-        });
-        
-        bottomNav.querySelectorAll('button').forEach((btn, idx) => {
-          btn.addEventListener('click', () => navigate(btn.dataset.view));
-        });
-      }
-    }
-    
-    // Override initApp to include sync
-    const originalInitApp = window.initApp;
-    window.initApp = function() {
-      if (originalInitApp) originalInitApp();
-      syncNavigation();
-    };
-  </script>
 </body>
 </html>
