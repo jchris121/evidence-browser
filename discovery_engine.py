@@ -528,8 +528,8 @@ def scan_discoveries_from_db(conn, device_map):
 
         # --- Critical date calls ---
         for date_str, (label, flames) in critical_dates_list:
-            cur.execute(
-            "SELECT COUNT(*) as count FROM records WHERE device_id=%s AND category='calls' AND timestamp LIKE %s",
+            count = cur.execute(
+                "SELECT COUNT(*) as count FROM records WHERE device_id=%s AND category='calls' AND timestamp LIKE %s",
                 (device_id, f"{date_str}%")
             ).fetchone()['count']
             if count:
@@ -596,16 +596,16 @@ def scan_discoveries_from_db(conn, device_map):
                 })
 
         # --- Passwords ---
-        pwd_cur.execute(
+        count = cur.execute(
             "SELECT COUNT(*) as count FROM records WHERE device_id=%s AND category='passwords'", (device_id,)
         ).fetchone()['count']
-        if pwd_count:
+        if count:
             disc_id += 1
             discoveries.append({
                 "id": f"pwd-{device_id}-{disc_id}",
-                "title": f"{owner}: {pwd_count} Stored Passwords Found",
+                "title": f"{owner}: {count} Stored Passwords Found",
                 "category": "Passwords", "flames": 2, "device_id": device_id,
-                "owner": owner, "content": f"Found {pwd_count} stored passwords/credentials.",
+                "owner": owner, "content": f"Found {count} stored passwords/credentials.",
                 "timestamp": None, "verified": False,
                 "tags": ["passwords", "credentials"], "data_type": "passwords",
             })
