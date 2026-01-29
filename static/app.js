@@ -147,7 +147,7 @@ function render() {
   const main = document.getElementById('app');
   const views = { dashboard: renderDashboard, device: renderDevice, search: renderSearch, discoveries: renderDiscoveries, mindmap: renderMindMap, legal: renderLegalFiles, admin: renderAdmin };
   (views[state.view] || renderDashboard)(main);
-  document.querySelectorAll('.nav-links button').forEach(b => {
+  document.querySelectorAll('#nav-buttons button').forEach(b => {
     b.classList.toggle('active', b.dataset.view === state.view);
   });
 }
@@ -916,7 +916,7 @@ function highlightMatch(text, query) {
 
 // --- Init ---
 function initApp() {
-  document.querySelectorAll('.nav-links button').forEach(b => b.addEventListener('click', () => navigate(b.dataset.view)));
+  document.querySelectorAll('#nav-buttons button').forEach(b => b.addEventListener('click', () => navigate(b.dataset.view)));
   document.getElementById('header-search')?.addEventListener('keydown', e => {
     if (e.key === 'Enter') { state.searchQuery = e.target.value; navigate('search'); }
   });
