@@ -13,8 +13,8 @@ async function handleLogin(e) {
   btn.disabled = true;
   errEl.style.display = 'none';
 
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+  const username = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
 
   try {
     const r = await fetch('/api/auth/login', {
