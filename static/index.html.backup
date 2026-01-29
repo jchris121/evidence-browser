@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evidence Browser — Tina Peters Case</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Login Page (shown when not authenticated) -->
+  <div id="login-page" class="login-page" style="display:none">
+    <div class="login-card">
+      <div class="login-logo">🔬</div>
+      <h1>Evidence <span>Browser</span></h1>
+      <p class="login-subtitle">Secure forensic evidence analysis</p>
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <input type="text" id="login-username" placeholder="Username" autocomplete="username" required>
+        <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" required>
+        <button type="submit" id="login-btn">Sign In</button>
+        <div id="login-error" class="login-error" style="display:none"></div>
+      </form>
+      <div class="login-footer">Powered by Evidence Browser</div>
+    </div>
+  </div>
+
+  <!-- Main App (shown when authenticated) -->
+  <div id="app-container" style="display:none">
+    <div class="header">
+      <h1>🔬 Evidence <span>Browser</span></h1>
+      <div class="nav-links">
+        <button data-view="discoveries" class="active">🔥 Discoveries</button>
+        <button data-view="dashboard">Dashboard</button>
+        <button data-view="search">Search</button>
+        <button data-view="mindmap">🕸️ Mind Map</button>
+        <button data-view="legal">⚖️ Legal Files</button>
+        <button data-view="admin" id="admin-nav-btn" style="display:none">⚙️ Admin</button>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="header-search" placeholder="Search all evidence...">
+      </div>
+      <div class="user-info" id="user-info">
+        <span id="user-display" class="user-display"></span>
+        <span id="user-role-badge" class="user-role-badge"></span>
+        <button onclick="handleLogout()" class="logout-btn">Logout</button>
+      </div>
+    </div>
+    <div class="main" id="app">
+      <div class="loading">Loading evidence data</div>
+    </div>
+
+    <!-- Chat FAB + Panel -->
+    <button class="chat-toggle" id="chat-toggle" onclick="toggleChat()" title="Ask AI about evidence">💬</button>
+    <div class="chat-panel" id="chat-panel">
+      <div class="chat-header">
+        <h3>🧠 Evidence AI</h3>
+        <span class="chat-scope-badge" id="chat-scope" style="display:none"></span>
+        <select id="chat-model" title="Model">
+          <option value="deepseek-r1:70b">🧠 Deep (DeepSeek 70B)</option>
+        </select>
+        <button class="close-btn" onclick="toggleChat()">✕</button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-msg system">Ask questions about the evidence. AI will search and cite sources.</div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Ask about the evidence..." onkeydown="if(event.key==='Enter'&&!event.shiftKey)sendChat()">
+        <button onclick="sendChat()" id="chat-send">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

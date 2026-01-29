@@ -1,0 +1,19 @@
+{
+  "name": "evidence-browser",
+  "version": "2.0.0",
+  "description": "Forensic evidence browser with Tailwind CSS - Tina Peters legal case",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./static/input.css -o ./static/style.css --minify",
+    "watch": "tailwindcss -i ./static/input.css -o ./static/style.css --watch",
+    "dev": "concurrently \"npm run watch\" \"uvicorn server:app --reload --port 8888\""
+  },
+  "keywords": ["forensics", "evidence", "legal", "tailwind"],
+  "author": "Bibbinz",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.33",
+    "autoprefixer": "^10.4.17"
+  }
+}

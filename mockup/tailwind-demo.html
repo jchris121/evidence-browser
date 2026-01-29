@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evidence Browser — Tailwind Mockup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'evidence': {
+              900: '#0d1117',
+              800: '#161b22',
+              700: '#21262d',
+              600: '#30363d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-gray-800 border-b border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <!-- Logo & Title -->
+        <div class="flex items-center space-x-3">
+          <span class="text-3xl">🔬</span>
+          <h1 class="text-2xl font-bold">
+            Evidence <span class="text-blue-400">Browser</span>
+          </h1>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="hidden md:flex space-x-1">
+          <button class="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            🔥 Discoveries
+          </button>
+          <button class="px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition">
+            Dashboard
+          </button>
+          <button class="px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition">
+            Search
+          </button>
+          <button class="px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition">
+            🕸️ Mind Map
+          </button>
+          <button class="px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 rounded-lg transition">
+            ⚖️ Legal Files
+          </button>
+        </nav>
+
+        <!-- User Menu -->
+        <div class="flex items-center space-x-3">
+          <span class="text-sm text-gray-400">admin</span>
+          <span class="px-2 py-1 text-xs font-medium bg-purple-600 text-white rounded">ADMIN</span>
+          <button class="px-3 py-2 text-sm font-medium text-gray-300 hover:text-white transition">
+            Logout
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="pb-4">
+        <div class="relative">
+          <input 
+            type="text" 
+            placeholder="Search all evidence..." 
+            class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+          <svg class="absolute right-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div class="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-blue-500 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Devices</p>
+            <p class="text-3xl font-bold text-white mt-1">23</p>
+          </div>
+          <div class="p-3 bg-blue-600 bg-opacity-20 rounded-lg">
+            <svg class="h-8 w-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-green-500 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Messages</p>
+            <p class="text-3xl font-bold text-white mt-1">345K</p>
+          </div>
+          <div class="p-3 bg-green-600 bg-opacity-20 rounded-lg">
+            <svg class="h-8 w-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-purple-500 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Discoveries</p>
+            <p class="text-3xl font-bold text-white mt-1">47</p>
+          </div>
+          <div class="p-3 bg-purple-600 bg-opacity-20 rounded-lg">
+            <svg class="h-8 w-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-orange-500 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Legal Files</p>
+            <p class="text-3xl font-bold text-white mt-1">1.2K</p>
+          </div>
+          <div class="p-3 bg-orange-600 bg-opacity-20 rounded-lg">
+            <svg class="h-8 w-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Discoveries -->
+    <div class="bg-gray-800 rounded-lg border border-gray-700">
+      <div class="px-6 py-4 border-b border-gray-700">
+        <h2 class="text-xl font-bold text-white flex items-center">
+          🔥 <span class="ml-2">Recent Discoveries</span>
+        </h2>
+      </div>
+      <div class="divide-y divide-gray-700">
+        
+        <!-- Discovery Item 1 -->
+        <div class="px-6 py-4 hover:bg-gray-750 transition cursor-pointer">
+          <div class="flex items-start justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-2 mb-2">
+                <span class="px-2 py-1 text-xs font-medium bg-red-600 text-white rounded">CRITICAL</span>
+                <span class="px-2 py-1 text-xs font-medium bg-gray-700 text-gray-300 rounded">Gerald Wood</span>
+                <span class="text-sm text-gray-400">2026-01-29</span>
+              </div>
+              <h3 class="text-lg font-semibold text-white mb-2">
+                Email evidence contradicts testimony - County access BEFORE trusted build
+              </h3>
+              <p class="text-sm text-gray-400 leading-relaxed">
+                May 13-14 emails show Gerald got county email/badge BEFORE May 23 trusted build. 
+                Tina lied to IT (said "from state"). August 2021: at Lindell Symposium as paid cyber expert.
+              </p>
+              <div class="flex items-center space-x-4 mt-3 text-sm text-gray-400">
+                <span>📱 Device: Gerald Wood Phone</span>
+                <span>📧 7 emails</span>
+                <span>🔗 Cross-referenced with Wendi Woods</span>
+              </div>
+            </div>
+            <div class="ml-4">
+              <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Discovery Item 2 -->
+        <div class="px-6 py-4 hover:bg-gray-750 transition cursor-pointer">
+          <div class="flex items-start justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-2 mb-2">
+                <span class="px-2 py-1 text-xs font-medium bg-orange-600 text-white rounded">HIGH</span>
+                <span class="px-2 py-1 text-xs font-medium bg-gray-700 text-gray-300 rounded">Signal Messages</span>
+                <span class="text-sm text-gray-400">2026-01-29</span>
+              </div>
+              <h3 class="text-lg font-semibold text-white mb-2">
+                11,658 encrypted Signal messages discovered across devices
+              </h3>
+              <p class="text-sm text-gray-400 leading-relaxed">
+                Wendi Woods iPhone: 7,951 Signal + 12,064 Telegram messages. Prayer mobilization network, 
+                Sherronna coordination during Aug 2021 raid, county official involvement.
+              </p>
+              <div class="flex items-center space-x-4 mt-3 text-sm text-gray-400">
+                <span>📱 2 devices</span>
+                <span>💬 11.6K messages</span>
+                <span>📅 March-Aug 2021</span>
+              </div>
+            </div>
+            <div class="ml-4">
+              <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Discovery Item 3 -->
+        <div class="px-6 py-4 hover:bg-gray-750 transition cursor-pointer">
+          <div class="flex items-start justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-2 mb-2">
+                <span class="px-2 py-1 text-xs font-medium bg-yellow-600 text-white rounded">MEDIUM</span>
+                <span class="px-2 py-1 text-xs font-medium bg-gray-700 text-gray-300 rounded">Deletion Evidence</span>
+                <span class="text-sm text-gray-400">2026-01-28</span>
+              </div>
+              <h3 class="text-lg font-semibold text-white mb-2">
+                Sherronna laptop shows systematic file deletion during investigation
+              </h3>
+              <p class="text-sm text-gray-400 leading-relaxed">
+                USB device history, recycle bin artifacts, and USN journal parsing reveal deliberate evidence removal. 
+                Cross-referenced with Wendi Woods messages for timeline reconstruction.
+              </p>
+              <div class="flex items-center space-x-4 mt-3 text-sm text-gray-400">
+                <span>💻 Sherronna Laptop</span>
+                <span>🗑️ Deleted files analyzed</span>
+                <span>📊 Chain of custody documented</span>
+              </div>
+            </div>
+            <div class="ml-4">
+              <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="px-6 py-4 border-t border-gray-700 bg-gray-850">
+        <button class="w-full py-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition">
+          View All Discoveries →
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 border-t border-gray-700 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex justify-between items-center">
+        <p class="text-sm text-gray-400">Evidence Browser v2.0 — Tina Peters Legal Defense</p>
+        <p class="text-sm text-gray-500">Built with Tailwind CSS</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
