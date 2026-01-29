@@ -30,4 +30,55 @@
   .input-field {
     @apply w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
   }
+
+  /* Navigation active states */
+  #nav-buttons button.active {
+    @apply bg-blue-600 text-white;
+  }
+  
+  #nav-buttons button:not(.active) {
+    @apply text-gray-300 hover:bg-gray-700;
+  }
+
+  /* Chat panel states */
+  #chat-panel.open {
+    transform: translateY(0) !important;
+  }
+
+  #chat-toggle.active {
+    @apply bg-blue-700 scale-110;
+  }
+
+  /* Filter pills */
+  .filter-pill.active {
+    @apply bg-blue-600 text-white;
+  }
+
+  .filter-pill:not(.active) {
+    @apply bg-gray-700 text-gray-400 hover:bg-gray-600;
+  }
+
+  /* Discovery items */
+  .disc-item.expanded .disc-content {
+    max-height: none !important;
+  }
+
+  /* Lightbox/Modal */
+  .lightbox-overlay, .legal-modal-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300 z-50;
+  }
+
+  .lightbox-overlay.open, .legal-modal-overlay.open {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  /* Media items */
+  .media-item.broken {
+    @apply opacity-50;
+  }
+
+  /* Chat loading animation */
+  .chat-loading {
+    @apply text-gray-400 text-sm italic;
+  }
 }
